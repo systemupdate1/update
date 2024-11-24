@@ -1,0 +1,1054 @@
+1.	Write a program to execute the conditional operator(ternary) in JavaScript.
+Ans:
+<html>
+  <head>
+    <title>Conditional operator</title>
+  </head>
+  <body>
+    <h1>Conditional operator</h1>
+    <label>Enter a number: </label>
+    <input type="text" id="num" /> <br />
+    <button onclick="check()">Submit</button>
+
+    <script>
+      function check() {
+        let num = parseInt(document.getElementById("num").value);
+        let message = num % 2 === 0 ? "Even" : "Odd";
+        alert(message);
+      }
+    </script>
+  </body>
+</html>
+
+
+2.	Write a JavaScript program to print the factorial of a given number. 
+Ans: 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Factorial Of a Number</title>
+</head>
+<body>
+    <h1>Factorial</h1>
+    <label>Enter a number: </label>
+    <input type='text' id='num'> <br><br>
+    <button onclick='calculateFactorial()'>Submit</button>
+
+    <script>
+        function calculateFactorial() {
+            let num = parseInt(document.getElementById('num').value);
+
+         function calculateFactorial(n) {
+    let fact = 1;
+    for (let i = 1; i <= n; i++) {
+        fact = fact*i;
+    }
+    alert(fact);
+}
+             calculateFactorial(num);
+        }
+    </script>
+</body>
+</html>
+3.	Write a JavaScript program to print the Fibonacci series till 10 number. 
+Ans:
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fibonacci series</title>
+  </head>
+  <body>
+    <h1>Fibonacci</h1>
+
+    <button onclick="fibo()">Submit</button>
+    <p id="res"></p>
+
+    <script>
+      function fibo() {
+        let a = 0;
+        b = 1;
+		let array=[];
+        let res = document.getElementById("res");
+        for (let i = 2; i < 10; i++) {
+          let c = a + b;
+          array.push(c);
+          a = b;
+          b = c;
+        }
+        alert(array);
+      }
+    </script>
+  </body>
+</html>
+
+
+4.	Write a code to find out whether the year is leap year or not.
+Ans: <!DOCTYPE html>
+<html>
+<head>
+    <title>Leap year</title>
+</head>
+<body>
+    <h1>Leap year</h1>
+    <label>Enter a year: </label>
+    <input type='text' id='num'> <br><br>
+    <button onclick='leap()'>Submit</button>
+
+    <script>
+        function leap() {
+        let num = parseInt(document.getElementById('num').value);
+        if ((num %4 === 0 || num %100 !== 0) && (num %400 === 0)){
+            alert(`${num} is a leap year`);
+        } else {
+            alert(`${num} is not a leap year`);
+        } 
+        }
+    </script>
+</body>
+</html>
+
+5.	Write the program for following operations on array?
+i)remove the first element from the array
+ii)add the new element at the end of the array? 
+iii)remove the element from the bottom of the array? 
+iv)create new array using elements of another array?
+Ans: <!DOCTYPE html>
+<html>
+<head>
+    <title>Array Operations</title>
+</head>
+<body>
+    <h1>Array Operations</h1>
+
+    <label>Enter array elements (comma-separated): </label>
+    <input type="text" id="arrayInput"> <br><br>
+
+    <label>Enter a new element to add (if needed): </label>
+    <input type="text" id="newElement"> <br><br>
+
+    <label>Select an operation:</label>
+    <select id="operation">
+        <option value="removeFirst">Remove the first element</option>
+        <option value="addLast">Add a new element at the end</option>
+        <option value="removeLast">Remove the last element</option>
+        <option value="createNew">Create a new array from existing</option>
+    </select> <br><br>
+
+    <button onclick="performOperation()">Perform Operation</button>
+
+    <p id="output"></p>
+
+    <script>
+        function performOperation() {
+            let input = document.getElementById("arrayInput").value;
+            let arr = input.split(',').map(item => item.trim()); // Convert input to array
+
+            let operation = document.getElementById("operation").value;
+
+            let outputMessage = "";
+
+            switch (operation) {
+                case "removeFirst":
+                    if (arr.length === 0) {
+                        outputMessage = "Array is empty, nothing to remove.";
+                    } else {
+                        let removedFirst = arr.shift();
+                        outputMessage = `First element removed: ${removedFirst}<br>Updated array: ${arr.join(', ')}`;
+                    }
+                    break;
+
+                case "addLast":
+                    let newElement = document.getElementById("newElement").value;
+                    if (!newElement) {
+                        outputMessage = "Please enter a new element to add.";
+                    } else {
+                        arr.push(newElement);
+                        outputMessage = `New element added: ${newElement}<br>Updated array: ${arr.join(', ')}`;
+                    }
+                    break;
+
+                case "removeLast":
+                    if (arr.length === 0) {
+                        outputMessage = "Array is empty, nothing to remove.";
+                    } else {
+                        let removedLast = arr.pop();
+                        outputMessage = `Last element removed: ${removedLast}<br>Updated array: ${arr.join(', ')}`;
+                    }
+                    break;
+
+                case "createNew":
+                    let newArr = arr.slice();
+                    outputMessage = `New array created: ${newArr.join(', ')}`;
+                    break;
+
+                default:
+                    outputMessage = "Invalid operation selected.";
+            }
+
+            document.getElementById("output").innerHTML = outputMessage;
+        }
+    </script>
+</body>
+</html>
+6.	Write a program to check whether the given staring is palindrome or not? 
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Palindrome Checker</title>
+</head>
+<body>
+    <h1>Palindrome Checker</h1>
+
+    <label>Enter a string: </label>
+    <input type="text" id="inputString"> <br><br>
+
+    <button onclick="checkPalindrome()">Check</button>
+
+    <p id="result"></p>
+
+    <script>
+        function checkPalindrome() {
+            let str = document.getElementById("inputString").value.toLowerCase();
+            let isPalindrome = str === str.split('').reverse().join('');
+            document.getElementById("result").innerHTML = isPalindrome 
+                ? `"${str}" is a palindrome.` 
+                : `"${str}" is not a palindrome.`;
+        }
+    </script>
+</body>
+</html>
+
+
+7.	Write a program to count the number of vowels into the string?
+Ans:
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vowels</title>
+    </head>
+    <body>
+        <h3>Count vowels</h3>
+        <label>Enter a string: </label>
+        <input type='text' id='str'> <br><br>
+        <button onclick='countVowels()'>Submit</button>
+
+        <script>
+            function countVowels() {
+                let str = document.getElementById('str').value.toLowerCase();
+                let count = 0;
+                for (let i = 0; i < str.length; i++) {
+                    if ('aeiouAEIOU'.includes(str[i])) {
+                        count++;
+                    }
+                }
+                alert("The number of vowels in the string is: " + count);
+            }
+        </script>
+    </body>
+</html>
+
+
+
+
+8.	Write a program to create the registration form for creating gmail account. 
+Ans: 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Email Registration Form</title>
+    </head>
+    <body>
+        <form onsubmit="Register(event)">
+            <h1>Email Registration Form</h1>
+            <label>First Name: </label>
+            <input type="text" id="first" required> <br><br>
+            
+            <label>Surname: </label>
+            <input type="text" id="last" required> <br><br>
+            
+            <label>Date of Birth: </label>
+            <input type="date" id="dob" required> <br><br>
+            
+            <label>Gender: </label>
+            <select id="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="dada tu thodi didi hai kya">dada tu thodi didi hai kya</option>                
+            </select> <br><br>
+            
+            <label>Email: </label>
+            <input type="email" id="email" required> <br><br>
+            
+            <button type="submit">😶‍🌫️Submit😶‍🌫️</button>
+        </form>
+
+        <script>
+            function Register(event) {
+                event.preventDefault();
+                
+                let first = document.getElementById('first').value;
+                let last = document.getElementById('last').value;
+                let dob = document.getElementById('dob').value;
+                let gender = document.getElementById('gender').value;
+                let email = document.getElementById('email').value;
+                
+                alert(`Your name is ${first} ${last}. \nYour date of birth is ${dob}. \nYour gender is ${gender}. \nYour email is ${email}.`);
+            }
+        </script>
+    </body>
+</html>
+
+
+9.	Write a JavaScript program for evaluating checkbox selection. 
+Ans:
+<html>
+<head>
+    <title>Car Selection</title>
+</head>
+<body>
+    <h1>Select Your Favorite Cars</h1>
+    
+    <form id="carForm">
+        <label><input type="checkbox" name="car" value="BMW"> BMW</label><br>
+        <label><input type="checkbox" name="car" value="Acura"> Acura</label><br>
+        <label><input type="checkbox" name="car" value="Toyota"> Toyota</label><br>
+        <label><input type="checkbox" name="car" value="Mercedes"> Mercedes</label><br>
+        <label><input type="checkbox" name="car" value="Honda"> Honda</label><br><br>
+        
+        <button type="button" onclick="evaluateSelection()">Submit</button>
+    </form>
+    
+    <p id="result"></p>
+
+    <script>
+        function evaluateSelection() {
+            let checkboxes = document.querySelectorAll('input[name="car"]'); // Get all checkboxes
+            let selectedCars = [];
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    selectedCars.push(checkboxes[i].value);
+                }
+            }
+
+            if (selectedCars.length > 0) {
+                document.getElementById('result').innerText = `You selected: ${selectedCars.join(', ')}`;
+            } else {
+                document.getElementById('result').innerText = "No cars selected.";
+            }
+        }
+    </script>
+</body>
+</html>
+
+10.	Write a JavaScript program for Changing Attribute Values Dynamically.
+Ans:
+<html>
+  <head>
+    <title>Change attribute value dynamically</title>
+  </head>
+  <body>
+    <img src="img1.jpg" alt="" id="i1" width="200px" />
+    <br />
+    <br />
+    <button onclick="change()">Change</button>
+
+    <script>
+      function change() {
+        let img = document.getElementById("i1");
+        i1.src = "img2.jpg";
+      }
+    </script>
+  </body>
+</html>
+
+
+11.	Write a program for changing the option list dynamically. 
+Ans: <!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Car Options</title>
+</head>
+<body>
+    <h1>Select Your Car</h1>
+    
+    <label for="carType">Choose Car Type:</label>
+    <select id="carType" onchange="updateCarOptions()">
+        <option value="">--Select Car Type--</option>
+        <option value="sports">Sports Cars</option>
+        <option value="hyper">Hypercars</option>
+        <option value="super">Supercars</option>
+    </select>
+    
+    <br><br>
+    
+    <label for="car">Choose Car:</label>
+    <select id="car">
+        <option value="">--Select a Car--</option>
+    </select>
+    
+    <script>
+        function updateCarOptions() {
+            const carType = document.getElementById('carType').value;
+            const carDropdown = document.getElementById('car');
+
+            carDropdown.innerHTML = '<option value="">--Select a Car--</option>';
+
+            const cars = {
+                sports: ["Porsche 911", "Chevrolet Corvette", "Ford Mustang"],
+                hyper: ["Bugatti Chiron", "Koenigsegg Jesko", "Pagani Huayra"],
+                super: ["Ferrari 488", "Lamborghini Huracán", "McLaren 720S"]
+            };
+
+            if (cars[carType]) {
+                cars[carType].forEach(car => {
+                    const option = document.createElement('option');
+                    option.value = car;
+                    option.textContent = car;
+                    carDropdown.appendChild(option);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
+12.	Develop a program for as we enter the firstname and lastname , email is automatically generated.
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Generation </title>
+</head>
+<body>
+    <h1>Email Generation </h1>
+    
+    <label for="fname">First name:</label>
+    <input type="text" id="fname"> <br><br>
+    <label for="lname">Surname:</label>
+    <input type="text" id="lname"> <br><br>
+
+    <button onclick="generateEmail()">Generate Email</button>
+
+    <script>
+        function generateEmail() {
+            const fname = document.getElementById('fname').value;
+            const lname = document.getElementById('lname').value;
+
+            if (fname === '' || lname === '') {
+                alert("Please fill out both fields!");
+                return;
+            }
+
+            const email = `${fname}.${lname}@gmail.com`;
+            alert(`Your email is: ${email}`);
+        }
+    </script>
+</body>
+</html>
+
+13.	Write a program to demonstrate the use of onchange event. 
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>onchange Event</title>
+</head>
+<body>
+    <h3>Change the Text</h3>
+    <input type="text" id="inputBox" onchange="showValue()">
+    <p id="output"></p>
+
+    <script>
+        function showValue() {
+            const value = document.getElementById('inputBox').value;
+            document.getElementById('output').textContent = `You entered: ${value}`;
+        }
+    </script>
+</body>
+</html>
+
+
+14.	Write a JavaScript program to demonstrate the addEventListener ().
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>addEventListener Example</title>
+</head>
+<body>
+    <h3>Click the Button</h3>
+    <button id="myButton">Click Me!</button>
+    <p id="output"></p>
+    <script>
+        const button = document.getElementById('myButton');
+        button.addEventListener('click', function() {
+            document.getElementById('output').textContent = "Button was clicked!";
+        });
+    </script>
+</body>  
+</html>
+
+
+
+
+15.	Write a program to disable and enabled text field. 
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enable and Disable Text Field</title>
+</head>
+<body>
+    <h3>Enable and Disable Text Field</h3>
+    <label for="inputText">Enter text:</label>
+    <input type="text" id="inputText" disabled> <br><br>
+    <button onclick="enableField()">Enable</button>
+    <button onclick="disableField()">Disable</button>
+    <script>
+        function enableField() {
+            document.getElementById('inputText').disabled = false;
+        }
+        function disableField() {
+            document.getElementById('inputText').disabled = true;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+16.	Write a JavaScript program to change the value of an element that the user cannot change (a read-only element)
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Change Read-Only Value</title>
+</head>
+<body>
+    <h3>Change Read-Only Value</h3>
+    <label for="readonlyInput">Read-Only Input:</label>
+    <input type="text" id="readonlyInput" value="This is read-only" readonly> <br><br>
+    <button onclick="changeValue()">Change Value</button>
+    <script>
+        function changeValue() { 
+            const inputElement = document.getElementById('readonlyInput');
+            inputElement.value = "New value changed by  vedang !";
+        }
+    </script>
+</body>
+</html>
+
+
+17.	Write a program to read the cookie. 
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cookie Demo</title>
+</head>
+<body>
+    <h3>Cookie Demo</h3>
+    <button onclick="setCookie()">Set Cookie</button>
+    <button onclick="getCookie()">Get Cookie</button>
+    <p id="result"></p>
+    
+
+    <script>
+        function setCookie() {
+            document.cookie = "user=John";
+            document.getElementById("result").textContent = "Cookie set!";
+        } 
+
+        function getCookie() {
+            let value = document.cookie;
+            document.getElementById("result").textContent = "Cookie value: " + value;
+        }
+    </script>
+</body>
+</html>
+
+18.	Write a program to delete the cookie.
+Ans:
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Cookie Demo</title>
+</head>
+<body>
+    <h3>Cookie Demo</h3>
+    <button onclick="setCookie()">Set Cookie</button>
+    <button onclick="getCookie()">Get Cookie</button>
+    <button onclick="deleteCookie()">Delete Cookie</button>
+    <p id="result"></p>
+
+    <script>
+        function setCookie() {
+
+        
+            document.cookie = "user=John";
+            document.getElementById("result").textContent = "Cookie set!";
+        }
+
+        function getCookie() {
+            let value = document.cookie;
+            document.getElementById("result").textContent = "Cookie value: " + value;
+        }
+
+        function deleteCookie() {
+            document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            document.getElementById("result").textContent = "Cookie deleted!";
+        }
+    </script>
+</body>
+</html>
+
+
+19.	Write a program to demonstrate the use of scrollBy () and scrollTo(). 
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scroll Example</title>
+</head>
+<body>
+    <h3>Car Showroom</h3>
+    <div id="showroom">
+        
+        <div>
+             Sedan <br>
+             SUV <br>
+             Sports Car <br>
+             Van <br>
+             Truck <br>
+             Tractor <br>
+             Coupe <br>
+             Taxi <br>
+        </div>
+    </div>
+
+    <button onclick="scrollByAmount()">Scroll Down (50px)</button>
+    <button onclick="scrollToTop()">Scroll to Top</button>
+
+    <script>
+        var showroom = document.getElementById('showroom');
+        showroom.style.width = "300px";
+        showroom.style.height = "100px";
+        showroom.style.overflow = "auto";
+        showroom.style.border = "2px solid black";
+
+        function scrollByAmount() {
+            showroom.scrollBy(0, 50);
+        }
+        function scrollToTop() {
+            showroom.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
+
+
+20.	Writing a number after a delay using setInterval ( ) method. In this example, numbers are displayed in a textarea after a 1 second.
+Ans:
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Set Interval Example</title>
+</head>
+<body>
+    <h3>Displaying Numbers with Delay</h3>
+    <textarea id="numberDisplay" rows="4" cols="50" readonly></textarea><br>
+    <button onclick="startCounting()">Start Counting</button>
+
+    <script>
+        var count = 1;
+        var interval;
+
+        function startCounting() {
+            interval = setInterval(function() {
+                document.getElementById('numberDisplay').value += count + "\n";
+                count++;
+                if (count > 10) {
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
+
+
+21.	Write a code that accepts username and Aadhar card as input texts. When the user enters Aadhar-card number, the javascript validates card number and displays whether card number is valid or not.
+Ans: 
+<html>
+    <head>
+        <title>Aadhar Validation</title>
+    </head>
+    <body>
+        <h3>Aadhar Validation</h3>
+        <label>Username: </label>
+        <input type="text" id="username" placeholder="Enter your username"> <br><br>
+        <label>Aadhar Number: </label>
+        <input type="text" id="aadhar" placeholder="Enter your aadhar number"> <br><br>
+        <button onclick="validate()">Submit</button>
+
+        <script>
+            let aadharPattern = /^\d{4}\s\d{4}\s\d{4}$/;
+            let num = document.getElementById('aadhar').value;
+            function validate() {
+                const username = document.getElementById('username').value;
+                const aadhar = document.getElementById('aadhar').value;
+
+                if (username === '' || aadhar === '') {
+                    alert("Please fill out both fields!");
+                    return;
+                }
+
+                if (!aadharPattern.test(aadhar)) {
+                    alert("Invalid aadhar number!");
+                    return;
+                }
+
+                alert("Aadhar number is valid!");
+            }
+        </script>
+    </body>
+</html>
+
+22.	Write a code to validate email-id.
+Ans: <html>
+    <head>
+        <title>Validate Email id</title>
+    </head>
+
+    <body>
+        <h3>Validate Email id</h3>
+        <input type="text" id="email" placeholder="Enter your email id">
+        <button onclick="validateEmail()">Validate Email</button>
+
+        <script>
+            function validateEmail() {  
+                const email = document.getElementById('email').value;
+                const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                if (pattern.test(email)) {
+                    alert("Email is valid!");
+                } else {
+                    alert("Email is invalid!");
+                }
+            }
+        </script>
+    </body>  
+</html>
+
+23.	Create a rollover effect that can change the color of its text. 
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rollover Effect</title>
+</head>
+<body>
+    <h3 onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'">
+        Hover over this text to see the color change!
+    </h3>
+</body>
+</html>
+
+
+24.	Create a rollover effect that can change the image. (Set of 4 images)
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Rollover Effect</title>
+</head>
+<body>
+    <h3>Hover over the image to change it!</h3>
+    <img 
+        id="rolloverImage" 
+        src="https://via.placeholder.com/150/0000FF/FFFFFF?text=Image+1" 
+        onmouseover="changeImage()" 
+        onmouseout="resetImage()" 
+        alt="Placeholder Image"
+    >
+
+    <script>
+        var images = [
+            "https://via.placeholder.com/150/FF0000/FFFFFF?text=Image+2",
+            "https://via.placeholder.com/150/00FF00/FFFFFF?text=Image+3",
+            "https://via.placeholder.com/150/FFFF00/FFFFFF?text=Image+4"
+        ];
+        var currentIndex = 0;
+
+        function changeImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            document.getElementById('rolloverImage').src = images[currentIndex];
+        }
+
+        function resetImage() {
+            document.getElementById('rolloverImage').src = "https://via.placeholder.com/150/0000FF/FFFFFF?text=Image+1";
+        }
+    </script>
+</body>
+</html>
+
+
+25.	Demonstrate the use of chain select menu. 
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chain Select Menu</title>
+</head>
+<body>
+    <h3>Choose Your Car Type and Model</h3>
+
+    <label for="carType">Select Car Type:</label>
+    <select id="carType" onchange="updateModels()">
+        <option value="">--Select--</option>
+        <option value="sports">Sports Car</option>
+        <option value="hyper">Hyper Car</option>
+        <option value="super">Super Car</option>
+    </select>
+
+    <label for="carModel">Select Car Model:</label>
+    <select id="carModel">
+        <option value="">--Select Model--</option>
+    </select>
+
+    <script>
+        function updateModels() {
+            var carType = document.getElementById('carType').value;
+            var carModel = document.getElementById('carModel');
+            carModel.innerHTML = "<option value=''>--Select Model--</option>";
+            var models = {
+                sports: ["Ferrari", "Lamborghini", "Porsche"],
+                hyper: ["Bugatti", "Koenigsegg", "McLaren"],
+                super: ["Audi R8", "Nissan GT-R", "Chevrolet Corvette"]
+            };
+            if (carType && models[carType]) {
+                models[carType].forEach(function(model) {
+                    var option = document.createElement("option");
+                    option.value = model.toLowerCase();
+                    option.text = model;
+                    carModel.add(option);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+26.	Demonstrate the use of context menu.
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom Context Menu</title>
+</head>
+<body>
+    <h3>Right-click anywhere on the page to see the custom context menu</h3>
+    <div id="contextMenu" style="display:none; position:absolute; background:#fff; border:1px solid #000;">
+        <p onclick="alert('Option 1')">hello</p>
+        <p onclick="alert('Option 2')">me</p>
+        <p onclick="alert('Option 3')">vedang  </p>
+    </div>
+
+    <script>
+        var contextMenu = document.getElementById("contextMenu");
+
+        document.addEventListener("contextmenu", function(event) {
+            event.preventDefault();
+            contextMenu.style.display = "block";
+            contextMenu.style.left = event.pageX + "px";
+            contextMenu.style.top = event.pageY + "px";
+        });
+
+        document.addEventListener("click", function() {
+            contextMenu.style.display = "none";
+        }); 
+    </script>
+</body>
+</html>
+
+
+
+
+27.	Write a program for pull down menu.
+Ans: <!DOCTYPE html>
+<html>
+<head>
+    <title>Car Selection</title>
+</head>
+<body>
+    <h3>Select a Car</h3>
+    
+    <select onchange="showSelection()">
+        <option value="">Choose a car</option>
+        <option value="Porsche 918 Spyder">Porsche 918 Spyder</option>
+        <option value="Honda NSX">Honda NSX</option>
+        <option value="Ford GT">Ford GT</option>
+        <option value="BMW M4">BMW M4</option>
+    </select>
+
+    <p id="result"></p>
+
+    <script>
+        function showSelection() {
+            let selected = event.target.value;
+            document.getElementById("result").textContent = 
+                selected ? "You selected: " + selected : "";
+        }
+    </script>
+</body>
+</html>
+
+28.	Write a program for email concealing 
+Ans:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Concealing</title>
+</head>
+<body>
+    <h3>Email Concealing</h3>
+    <label>Enter Email: </label>
+    <input type="text" id="email"> <br><br>
+    <button onclick="concealEmail()">Conceal</button>
+
+    <p id="result"></p>
+
+    <script>   
+        function concealEmail() {
+            var email = document.getElementById("email").value;
+            var atIndex = email.indexOf("@");
+
+            if (atIndex > 0) {
+                var concealed = email.slice(0, 2) + "*****" + email.slice(atIndex);
+                document.getElementById("result").innerText = "Concealed Email: " + concealed;
+            } else {
+                document.getElementById("result").innerText = "Invalid email format!";
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+29.	Create rotating banner Ads with URL links.
+Ans:
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rotating Banner Ads</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+      #banner {
+        width: 600px;
+        height: 300px;
+        margin: 0 auto;
+        border: 2px solid #ccc;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rotating Banner Ads</h1>
+    <div id="banner">
+      <a id="bannerLink" href="#" target="_blank">
+        <img
+          id="bannerImg"
+          src="https://via.placeholder.com/600x300.png?text=Ad+1"
+          alt="Banner Ad"
+        />
+      </a>
+    </div>
+
+    <script>
+      const ads = [
+        {
+          img: "https://via.placeholder.com/600x300.png?text=Ad+1",
+          url: "https://example.com/ad1",
+        },
+        {
+          img: "https://via.placeholder.com/600x300.png?text=Ad+2",
+          url: "https://example.com/ad2",
+        },
+        {
+          img: "https://via.placeholder.com/600x300.png?text=Ad+3",
+          url: "https://example.com/ad3",
+        },
+        {
+          img: "https://via.placeholder.com/600x300.png?text=Ad+4",
+          url: "https://example.com/ad4",
+        },
+      ];
+
+      let currentAd = 0;
+
+      function rotateAds() {
+        currentAd = (currentAd + 1) % ads.length;
+        document.getElementById("bannerImg").src = ads[currentAd].img;
+        document.getElementById("bannerLink").href = ads[currentAd].url;
+      }
+
+      setInterval(rotateAds, 3000); // Change ad every 3 seconds
+    </script>
+  </body>
+</html>
+
+
+30.	Create a slideshow with group of four images, also simulate the next and previous transition between slides in javascript.
+Ans:
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .slide {
+        display: none;
+      }
+    </style>
+    <script type="text/javascript">
+      var currentSlide = 0;
+      var slides = [
+        "img1.jpg",
+        "img2.jpg",
+        "img3.jpg",
+        "img4.jpg",
+        "img5.jpg",
+        "img6.jpg",
+      ];
+
+      function showSlide(index) {
+        var imgElement = document.getElementById("slideImage");
+        imgElement.src = slides[index];
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      }
+    </script>
+  </head>
+  <body onload="showSlide(currentSlide)">
+    <img id="slideImage" src="img1.jpg" alt="Slide" width="500" />
+    <br />
+    <button onclick="prevSlide()">Previous</button>
+    <button onclick="nextSlide()">Next</button>
+  </body>
+</html>
+
