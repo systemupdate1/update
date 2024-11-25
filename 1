@@ -1,1 +1,572 @@
 
+1. Design your biodata by using various AWT components.
+import java.awt.*;
+import java.awt.event.*;
+
+public class BiodataAWT {
+    public static void main(String[] args) {
+        // Create the frame
+        Frame frame = new Frame("Biodata Form");
+        frame.setSize(500, 500);
+        frame.setLayout(new GridLayout(2, 1));
+
+        // Form Panel Components
+        Panel formPanel = new Panel(new GridLayout(5, 2, 10, 10));
+
+        Label nameLabel = new Label("Name:");
+        TextField nameField = new TextField();
+
+        Label genderLabel = new Label("Gender:");
+        CheckboxGroup genderGroup = new CheckboxGroup();
+        Panel genderPanel = new Panel(new FlowLayout());
+        genderPanel.add(new Checkbox("Male", genderGroup, false));
+        genderPanel.add(new Checkbox("Female", genderGroup, true));
+
+        Label qualificationLabel = new Label("Qualification:");
+        Choice qualificationChoice = new Choice();
+        qualificationChoice.add("High School");
+        qualificationChoice.add("Bachelor's");
+        qualificationChoice.add("Master's");
+
+        Label hobbiesLabel = new Label("Hobbies:");
+        Panel hobbiesPanel = new Panel(new FlowLayout());
+        hobbiesPanel.add(new Checkbox("Reading"));
+        hobbiesPanel.add(new Checkbox("Traveling"));
+
+        Button submitButton = new Button("Submit");
+        TextArea previewArea = new TextArea();
+        previewArea.setEditable(false);
+
+        // Add components to form panel
+        formPanel.add(nameLabel);
+        formPanel.add(nameField);
+        formPanel.add(genderLabel);
+        formPanel.add(genderPanel);
+        formPanel.add(qualificationLabel);
+        formPanel.add(qualificationChoice);
+        formPanel.add(hobbiesLabel);
+        formPanel.add(hobbiesPanel);
+        formPanel.add(submitButton);
+
+        // Add panels to the frame
+        frame.add(formPanel);
+        frame.add(previewArea);
+
+        // Add action listener to the submit button
+        submitButton.addActionListener(e -> {
+            String name = nameField.getText();
+            String gender = genderGroup.getSelectedCheckbox().getLabel();
+            String qualification = qualificationChoice.getSelectedItem();
+            String hobbies = "";
+            for (Component c : hobbiesPanel.getComponents()) {
+                Checkbox hobby = (Checkbox) c;
+                if (hobby.getState()) {
+                    hobbies += hobby.getLabel() + " ";
+                }
+            }
+
+            previewArea.setText("Name: " + name + "\n" +
+                                "Gender: " + gender + "\n" +
+                                "Qualification: " + qualification + "\n" +
+                                "Hobbies: " + hobbies.trim());
+        });
+
+        // Handle window close
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                frame.dispose();
+            }
+        });
+
+        // Make the frame visible
+        frame.setVisible(true);
+    }
+}
+
+
+
+2. Design an applet/Application using List components to add names of 10
+different cities.
+import java.applet.Applet;
+import java.awt.*;
+
+public class CityListApplet extends Applet {
+    public void init() {
+        List cityList = new List(10);
+        String[] cities = {"Mumbai", "Delhi", "Chennai", "Kolkata", "Pune", "Hyderabad", "Bangalore", "Ahmedabad", "Surat", "Jaipur"};
+        
+        for (String city : cities) {
+            cityList.add(city);
+        }
+        
+        add(cityList);
+    }
+}
+
+3. WAP to use Border Layout .
+import java.awt.*;
+import java.awt.event.*;
+public class BorderLayoutExample {
+    public static void main(String[] args) {
+        Frame frame = new Frame("Border Layout Example");
+        frame.setSize(300, 200);
+        frame.setLayout(new BorderLayout());
+
+        frame.add(new Button("North"), BorderLayout.NORTH);
+        frame.add(new Button("South"), BorderLayout.SOUTH);
+        frame.add(new Button("East"), BorderLayout.EAST);
+        frame.add(new Button("West"), BorderLayout.WEST);
+        frame.add(new Button("Center"), BorderLayout.CENTER);
+
+        frame.setVisible(true);
+		
+		  frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                frame.dispose();
+            }
+        });
+    }
+}
+
+4. WAP which creates Menu of different colors and disable menu item for Black
+color.
+import java.awt.*;
+import java.awt.event.*;
+
+public class MenuExample {
+    public static void main(String[] args) {
+        Frame frame = new Frame("Menu Example");
+        MenuBar menuBar = new MenuBar();
+        Menu colors = new Menu("Colors");
+
+        MenuItem red = new MenuItem("Red");
+        MenuItem green = new MenuItem("Green");
+        MenuItem black = new MenuItem("Black");
+
+        black.setEnabled(false);
+
+        colors.add(red);
+        colors.add(green);
+        colors.add(black);
+        menuBar.add(colors);
+
+        frame.setMenuBar(menuBar);
+        frame.setSize(400, 300);
+        frame.setVisible(true);
+			  frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                frame.dispose();
+            }
+        });
+    }
+}
+
+
+5. WAP to develop a frame to select the different states of India using JComboBox
+import javax.swing.*;
+import java.awt.*;
+public class ComboBoxExample {
+    public static void main(String[] args) {
+		
+        JFrame frame = new JFrame("State Selector");
+		 frame.setLayout(new FlowLayout());
+        String[] states = {"Maharashtra", "Gujarat", "Karnataka", "Tamil Nadu", "Punjab", "Kerala"};
+        JComboBox<String> comboBox = new JComboBox<>(states);
+
+        frame.add(comboBox);
+        frame.setSize(300, 200);
+       
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+6. Develop a program to demonstrate the use of tree component in swing.
+	import java.awt.*;
+	import java.awt.event.*;
+	import javax.swing.*;
+	import javax.swing.tree.*;
+
+	public class JTreeExample extends JFrame {
+		JTree tree;
+		JTextField jtf;
+
+		public JTreeExample() {
+		  
+			setTitle("JTree Example");
+			setSize(400, 300);
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setLocationRelativeTo(null);
+
+			Container contentPane = getContentPane();
+			contentPane.setLayout(new BorderLayout());
+
+			
+			DefaultMutableTreeNode top = new DefaultMutableTreeNode("Options");
+
+			DefaultMutableTreeNode a = new DefaultMutableTreeNode("A");
+			top.add(a);
+			DefaultMutableTreeNode a1 = new DefaultMutableTreeNode("A1");
+			a.add(a1);
+			DefaultMutableTreeNode a2 = new DefaultMutableTreeNode("A2");
+			a.add(a2);
+
+			DefaultMutableTreeNode b = new DefaultMutableTreeNode("B");
+			top.add(b);
+			DefaultMutableTreeNode b1 = new DefaultMutableTreeNode("B1");
+			b.add(b1);
+			DefaultMutableTreeNode b2 = new DefaultMutableTreeNode("B2");
+			b.add(b2);
+			DefaultMutableTreeNode b3 = new DefaultMutableTreeNode("B3");
+			b.add(b3);
+
+		   
+			tree = new JTree(top);
+			JScrollPane jsp = new JScrollPane(tree, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+					ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+			
+			contentPane.add(jsp, BorderLayout.CENTER);
+
+			jtf = new JTextField("", 20);
+			contentPane.add(jtf, BorderLayout.SOUTH);
+
+
+			tree.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent me) {
+					doMouseClicked(me);
+				}
+			});
+		}
+
+		private void doMouseClicked(MouseEvent me) {
+			TreePath tp = tree.getPathForLocation(me.getX(), me.getY());
+			if (tp != null) {
+				jtf.setText(tp.toString());  
+
+				
+				if (tp.getLastPathComponent().toString().equals("A1")) {
+					opena1window();
+				}
+			} else {
+				jtf.setText("");
+			}
+			if (tp.getLastPathComponent().toString().equals("A2"))
+			{
+				opena2window();
+			}
+			else{
+				jtf.setText("");
+			}
+			if (tp.getLastPathComponent().toString().equals("B1"))
+			{
+				openb1window();
+			}
+			else{
+				jtf.setText("");
+			}
+			if (tp.getLastPathComponent().toString().equals("B2"))
+			{
+				openb2window();
+			}
+			else{
+				jtf.setText("");
+			}
+			if (tp.getLastPathComponent().toString().equals("B3"))
+			{
+				openb3window();
+			}
+			else{
+				jtf.setText("");
+			}
+		}
+
+	   
+		public void opena1window() {
+			JFrame a1frame = new JFrame("Settings");
+			a1frame.setSize(400, 300);
+			a1frame.setLocationRelativeTo(null); 
+			a1frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+
+			JPanel panel = new JPanel(new BorderLayout());
+			JLabel label = new JLabel("A1 Page Preview Pane", JLabel.CENTER);
+			panel.add(label, BorderLayout.CENTER);
+		
+			a1frame.add(panel);
+			a1frame.setVisible(true);
+		}
+	public void opena2window() {
+			JFrame a2frame = new JFrame("Settings");
+			a2frame.setSize(400, 300);
+			a2frame.setLocationRelativeTo(null); 
+			a2frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+
+			JPanel panel = new JPanel(new BorderLayout());
+			JLabel label = new JLabel("A2 Page Preview Pane", JLabel.CENTER);
+			panel.add(label, BorderLayout.CENTER);
+		
+			a2frame.add(panel);
+			a2frame.setVisible(true);
+		}
+		public void openb1window() {
+			JFrame b1frame = new JFrame("Settings");
+			b1frame.setSize(400, 300);
+			b1frame.setLocationRelativeTo(null); 
+			b1frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+
+			JPanel panel = new JPanel(new BorderLayout());
+			JLabel label = new JLabel("B1 Page Preview Pane", JLabel.CENTER);
+			panel.add(label, BorderLayout.CENTER);
+		
+			b1frame.add(panel);
+			b1frame.setVisible(true);
+		}
+	   
+	   public void openb2window() {
+			JFrame b2frame = new JFrame("Settings");
+			b2frame.setSize(400, 300);
+			b2frame.setLocationRelativeTo(null); 
+			b2frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+
+			JPanel panel = new JPanel(new BorderLayout());
+			JLabel label = new JLabel("B2 Page Preview Pane", JLabel.CENTER);
+			panel.add(label, BorderLayout.CENTER);
+		
+			b2frame.add(panel);
+			b2frame.setVisible(true);
+		}
+		 public void openb3window() {
+			JFrame b3frame = new JFrame("Settings");
+			b3frame.setSize(400, 300);
+			b3frame.setLocationRelativeTo(null); 
+			b3frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+
+			JPanel panel = new JPanel(new BorderLayout());
+			JLabel label = new JLabel("B3 Page Preview Pane", JLabel.CENTER);
+			panel.add(label, BorderLayout.CENTER);
+		
+			b3frame.add(panel);
+			b3frame.setVisible(true);
+		}
+	   
+	   
+	   
+		public static void main(String[] args) {
+			JTreeExample j = new JTreeExample();
+			j.setVisible(true);
+		}
+	}
+7. Develop a program to demonstrate the use of JTable.
+import javax.swing.*;
+import java.awt.*;
+public class JTableExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("JTable Example");
+
+        String[][] data = {
+            {"1", "John", "25"},
+            {"2", "Anna", "30"},
+            {"3", "Mike", "28"}
+        };
+
+        String[] columns = {"ID", "Name", "Age"};
+
+        JTable table = new JTable(data, columns);
+        frame.add(new JScrollPane(table));
+
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+8. WAP to demonstrate various mouse events using MouseListener and
+MouseMotionListener interface
+import java.awt.*;
+import java.awt.event.*;
+
+public class MouseEventExample extends Frame implements MouseListener, MouseMotionListener {
+    Label label;
+
+    public MouseEventExample() {
+        label = new Label();
+        label.setBounds(20, 50, 300, 20);
+
+        add(label);
+        addMouseListener(this);
+        addMouseMotionListener(this);
+
+        setSize(400, 300);
+        setLayout(null);
+        setVisible(true);
+
+        // Close the window on close button
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+    }
+
+    // MouseListener methods
+    public void mouseClicked(MouseEvent e) {
+        label.setText("Mouse Clicked at (" + e.getX() + ", " + e.getY() + ")");
+    }
+
+    public void mouseEntered(MouseEvent e) {
+        label.setText("Mouse Entered the Frame");
+    }
+
+    public void mouseExited(MouseEvent e) {
+        label.setText("Mouse Exited the Frame");
+    }
+
+    public void mousePressed(MouseEvent e) {
+        label.setText("Mouse Pressed at (" + e.getX() + ", " + e.getY() + ")");
+    }
+
+    public void mouseReleased(MouseEvent e) {
+        label.setText("Mouse Released at (" + e.getX() + ", " + e.getY() + ")");
+    }
+
+    // MouseMotionListener methods
+    public void mouseMoved(MouseEvent e) {
+        label.setText("Mouse Moved at (" + e.getX() + ", " + e.getY() + ")");
+    }
+
+    public void mouseDragged(MouseEvent e) {
+        label.setText("Mouse Dragged at (" + e.getX() + ", " + e.getY() + ")");
+    }
+
+    public static void main(String[] args) {
+        new MouseEventExample();
+    }
+}
+
+9. WAP to demonstrate the use of JTextfield and JPasswordField using Listener
+Interface
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class TextFieldPasswordFieldExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Login Form");
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(null);
+
+        JLabel userLabel = new JLabel("Username:");
+        userLabel.setBounds(20, 20, 100, 30);
+        JTextField userField = new JTextField();
+        userField.setBounds(120, 20, 150, 30);
+
+        JLabel passLabel = new JLabel("Password:");
+        passLabel.setBounds(20, 60, 100, 30);
+        JPasswordField passField = new JPasswordField();
+        passField.setBounds(120, 60, 150, 30);
+
+        JButton submitButton = new JButton("Submit");
+        submitButton.setBounds(100, 100, 100, 30);
+
+        submitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String username = userField.getText();
+                String password = new String(passField.getPassword());
+                JOptionPane.showMessageDialog(frame, "Username: " + username + "\nPassword: " + password);
+            }
+        });
+
+        frame.add(userLabel);
+        frame.add(userField);
+        frame.add(passLabel);
+        frame.add(passField);
+        frame.add(submitButton);
+
+        frame.setVisible(true);
+    }
+}
+
+10. WAP to demonstrate the use of WindowAdapter class
+	import java.awt.*;
+import java.awt.event.*;
+
+public class WindowAdapterExample {
+    public static void main(String[] args) {
+        Frame frame = new Frame("WindowAdapter Example");
+        frame.setSize(300, 200);
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Window is closing");
+                frame.dispose();
+            }
+        });
+
+        frame.setVisible(true);
+    }
+}
+
+11. WAP to demonstrate the use of InetAddress class and its factory methods
+import java.net.*;
+
+public class InetAddressExample {
+    public static void main(String[] args) {
+        try {
+            InetAddress local = InetAddress.getLocalHost();
+            System.out.println("Local Host Name: " + local.getHostName());
+            System.out.println("Local IP Address: " + local.getHostAddress());
+
+            InetAddress google = InetAddress.getByName("www.google.com");
+            System.out.println("Google Host Name: " + google.getHostName());
+            System.out.println("Google IP Address: " + google.getHostAddress());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+12. WAP to demonstrate the use of URL and URLConnection class and its methods
+import java.io.*;
+import java.net.*;
+
+public class URLExample {
+    public static void main(String[] args) {
+        try {
+            // Define the URL
+            URL url = new URL("https://www.google.com");
+
+            // Open and configure the connection
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
+
+            // Check the response code
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) { // Success
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    String inputLine;
+                    while ((inputLine = in.readLine()) != null) {
+                        System.out.println(inputLine);
+                    }
+                }
+            } else {
+                System.out.println("Failed: HTTP error code " + responseCode);
+            }
+
+            // Disconnect the connection
+            connection.disconnect();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+13. WAP to insert and retrieve the data from database using JDBC
+
+14. WAP servlet to send username and password using HTML forms and
+authenticate the user
